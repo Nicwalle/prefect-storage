@@ -9,7 +9,7 @@ from datetime import timedelta
 from prefect import Client
 from prefect.environments import LocalEnvironment
 from prefect.environments import DaskKubernetesEnvironment
-from prefect.environments.storage import Github
+from prefect.environments.storage import GitHub
 
 @task
 def hello_task():
@@ -64,7 +64,7 @@ with Flow("Example Flow") as flow:
     
     end = end_task(val)
 
-flow.storage = Github(repo="Nicwalle/prefect-storage", path="help.py")
+flow.storage = GitHub(repo="Nicwalle/prefect-storage", path="help.py")
 
 flow.register(project_name="Test project 1", labels=["prefect-namespace"])
 
