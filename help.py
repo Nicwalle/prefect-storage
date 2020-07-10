@@ -1,5 +1,5 @@
 import prefect
-from prefect import task, Flow
+from prefect import task, Flow, triggers
 from random import choice
 from prefect.tasks.control_flow.case import case
 from prefect.tasks.control_flow.conditional import merge
@@ -36,7 +36,7 @@ def second_task():
 def end_task(x: int):
     log('This is the end. Final value is {}'.format(x))
 
-@task
+@task(trigger=triggers.manual_only)
 def run_in_parrallel():
     log('Running concurrently')
 
