@@ -10,6 +10,7 @@ from prefect import Client
 from prefect.environments import LocalEnvironment
 from prefect.environments import DaskKubernetesEnvironment
 from prefect.environments.storage import GitHub
+from prefect.engine.executors.dask import DaskExecutor
 
 @task
 def hello_task():
@@ -43,10 +44,8 @@ def log(msg: str) -> None:
     logger = prefect.context.get("logger")
     logger.info(msg)
 
-environment = DaskKubernetesEnvironment()
 
-
-with Flow("Example Flow", environment=environment) as flow:
+with Flow("Example Flow", environment=LocalEnvironment(executor=DaskExecutor())) as flow:
     hello = hello_task()
     cond = is_true_task()
     hello.set_downstream(cond) 
