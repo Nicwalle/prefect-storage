@@ -17,17 +17,17 @@ def hello_task():
     sleep(1)
 
 @task
-def is_true_task() -> None:
+def is_true_task():
     log('Choosing branch')
     return choice([True, False]) # Chooses a random boolean value
 
 @task
-def first_task() -> int:
+def first_task():
     log('Executing first_task')
     return 1234
 
 @task
-def second_task() -> int:
+def second_task():
     log('Executing second_task')
     return 5678
 
@@ -43,10 +43,10 @@ def log(msg: str) -> None:
     logger = prefect.context.get("logger")
     logger.info(msg)
 
-# environment = DaskKubernetesEnvironment(labels=["prefect-namespace"])
+environment = DaskKubernetesEnvironment()
 
 
-with Flow("Example Flow") as flow:
+with Flow("Example Flow", environment=environment) as flow:
     hello = hello_task()
     cond = is_true_task()
     hello.set_downstream(cond) 
