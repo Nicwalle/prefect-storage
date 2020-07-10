@@ -66,6 +66,4 @@ with Flow("Example Flow") as flow:
 
 flow.storage = GitHub(repo="Nicwalle/prefect-storage", path="help.py")
 
-flow.register(project_name="Test project 1", labels=["prefect-namespace"])
-
-# 7b75f750949da928a35ebe28b0c9995589598bc7 
+# flow.register(project_name="Test project 1", labels=["prefect-namespace"])
