@@ -9,7 +9,7 @@ from datetime import timedelta
 from prefect import Client
 from prefect.environments import LocalEnvironment
 from prefect.environments import DaskKubernetesEnvironment
-from prefect.environments.storage.github import Github
+from prefect.environments.storage import Github
 
 @task
 def hello_task():
